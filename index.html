@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -82,6 +82,17 @@
             margin-bottom: 20px;
             color: #333;
         }
+        #message {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: auto;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            z-index: 1050; /* Higher than most elements */
+        }
     </style>
 </head>
 <body>
@@ -90,12 +101,15 @@
         <div class="word-container">
             <div class="word" id="word"></div>
         </div>
-        <p>Vieți rămase: <span id="lives">7</span></p>
+        <p>Vieți rămase: <span idA="lives">7</span></p>
         <p>Încearcă o literă:</p>
         <input type="text" id="guessInput">
         <button onclick="guessLetter()">Trimite</button>
     </div>
-
+    <div id="message"></div>
+    <div id="word"></div>
+    <div id="lives"></div>
+ 
     <script src="hangman.js"></script>
 </body>
 </html>
