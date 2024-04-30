@@ -13,11 +13,9 @@ function startGame() {
 
 function guessLetter() {
     const guessInput = document.getElementById('guessInput');
-    const letter = guessInput.value.toLowerCase();
-    const messageElement = document.getElementById('message');
+    const letter = guessInput.value.toLowerCase(); // Convertim inputul direct în literă mică
 
-    if (letter.length !== 1 || !/^[a-z]$/.test(letter)) {
-        displayMessage('Va rugam introduceti o litera.', 'warning');
+    if (!/^[a-z]$/.test(letter)) { // Verificăm dacă 'letter' este exact o literă        displayMessage('Vă rugăm introduceți o literă.', 'warning');
         return;
     }
 
@@ -51,7 +49,15 @@ function guessLetter() {
 
 function displayWord() {
     const wordElement = document.getElementById('word');
-    wordElement.innerHTML = hiddenWord.split('').map(letter => `<span class="word-line">${letter}</span>`).join('');
+    wordElement.textContent = ''; // Clear existing content
+    const hiddenWordArray = hiddenWord.split('');
+
+    hiddenWordArray.forEach(letter => {
+        const letterSpan = document.createElement('span');
+        letterSpan.className = 'word-line'; // Apply the same class
+        letterSpan.textContent = letter;
+        wordElement.appendChild(letterSpan);
+    });
 }
 
 function updateLivesDisplay() {
