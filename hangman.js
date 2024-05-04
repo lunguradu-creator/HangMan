@@ -1,4 +1,4 @@
-const words = ['cuvant', 'arhanghel', 'biblioteca', 'masina', 'computers', 'paralelipiped'];
+const words = ['word', 'arhanghel', 'vertical', 'cars', 'computers', 'moon'];
 let currentWord;
 let hiddenWord;
 let lives;
@@ -13,9 +13,10 @@ function startGame() {
 
 function guessLetter() {
     const guessInput = document.getElementById('guessInput');
-    const letter = guessInput.value.toLowerCase(); // Convertim inputul direct în literă mică
+    const letter = guessInput.value.toLowerCase();
 
-    if (!/^[a-z]$/.test(letter)) { // Verificăm dacă 'letter' este exact o literă        displayMessage('Vă rugăm introduceți o literă.', 'warning');
+    if (!/^[a-z]$/.test(letter)) { 
+        displayMessage('Please enter a letter.', 'warning');
         return;
     }
 
@@ -28,7 +29,7 @@ function guessLetter() {
             }
         }
         if (!updated) {
-            displayMessage(`Litera "${letter}" a fost deja ghicită.`, 'info');
+            displayMessage(`Letter "${letter}" has already been guessed.`, 'info');
         } else {
             displayWord();
         }
@@ -41,7 +42,7 @@ function guessLetter() {
         if (lives === 0) {
             endGame('lost');
         } else {
-            displayMessage(`Litera "${letter}" nu este în cuvânt.`, 'danger');
+            displayMessage(`Letter "${letter}" is not in the word.`, 'danger');
         }
     }
     guessInput.value = '';
@@ -54,7 +55,7 @@ function displayWord() {
 
     hiddenWordArray.forEach(letter => {
         const letterSpan = document.createElement('span');
-        letterSpan.className = 'word-line'; // Apply the same class
+        letterSpan.className = 'word-line';
         letterSpan.textContent = letter;
         wordElement.appendChild(letterSpan);
     });
@@ -70,9 +71,9 @@ function endGame(result) {
     let message;
 
     if (result === 'won') {
-        message = 'Felicitari, ai castigat!';
+        message = 'Congratulations. You win!';
     } else {
-        message = `:( Ai pierdut. Cuvantul era: ${currentWord}`;
+        message = `:( You lost. The word was: ${currentWord}`;
     }
 
     displayMessage(message, result === 'won' ? 'success' : 'danger');
@@ -82,8 +83,8 @@ function endGame(result) {
 function displayMessage(message, type) {
     const messageElement = document.getElementById('message');
     messageElement.textContent = message;
-    messageElement.className = `alert alert-${type}`; // Use Bootstrap classes for alert types
-    messageElement.style.display = 'block'; // Make sure it's visible
+    messageElement.className = `alert alert-${type}`;
+    messageElement.style.display = 'block';
     setTimeout(() => { messageElement.style.display = 'none'; }, 3000); // Hide after 3 seconds
 }
 
